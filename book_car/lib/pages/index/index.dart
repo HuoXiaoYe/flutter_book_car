@@ -1,11 +1,14 @@
 // import 'dart:convert';
 
+import 'dart:ui' as prefix0;
+
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../config/banner_src.dart';
 import '../../config/nav.dart';
 import '../../config/recommend.dart';
+import './recommend_list/recommend_list.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -21,7 +24,8 @@ class _IndexState extends State<Index> with AutomaticKeepAliveClientMixin {
       // child:Text("首页")
       children: <Widget>[
         Banner(), // 轮播图组件
-        Tabbar(),
+        Tabbar(), // 导航组件
+        Recommend(), // 附近推荐
       ],
     );
   }
@@ -71,7 +75,7 @@ class _BannerState extends State<Banner> {
 class Tabbar extends StatelessWidget {
   Widget item(data) {
     return Container(
-      padding: EdgeInsets.only(top: 8,bottom: 5),
+      padding: EdgeInsets.only(top: 8, bottom: 5),
       width: 70,
       child: InkWell(
           onDoubleTap: () {},
@@ -94,7 +98,7 @@ class Tabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
+        // margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,17 +111,106 @@ class Tabbar extends StatelessWidget {
 
 // 附近推荐
 
-
 class Recommend extends StatelessWidget {
+  Widget _item(data) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(8, 16, 8, 3),
+      height: 170,
+      child: InkWell(
+        onTap: () {
+          // print(111); test success
+        },
+        child: Column(
+          children: <Widget>[
+            Container(
+              // margin: EdgeInsets.only(bottom: 5),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(25))),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: Image.network(data["img"]),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 6,),
+              child: Text(data["title"]),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text("￥",style: TextStyle(fontSize: 12,color: Colors.orange),), 
+                Padding(
+                  padding: EdgeInsets.only(right: 3),
+                  child: Text(data["price_0"],style: TextStyle(fontSize: 18,color: Colors.orange),),
+                ),
+                Text("起",style: TextStyle(fontSize: 14),)
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _title(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 8, top: 8),
+      height: 44,
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            "附近推荐",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Colors.black54),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            height: 25,
+            padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.black26),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context)=>new RecommendList()));
+              },
+              child: Text(
+                "查看更多",
+                style: TextStyle(color: Colors.black45),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[],
+      height: 224,
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            _title(context),
+            Container(
+              height: 170,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: recommendList.map((v) => _item(v)).toList(),
+              ),
+            )
+          ],
         ),
+      ),
     );
   }
 }
-
-
