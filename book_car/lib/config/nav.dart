@@ -8,15 +8,15 @@ List<Map> NavList = [
     "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/flight.png"
   },
   {
-    "title":"度假",
-    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/hotel.png"
+    "title":"去哪玩",
+    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/package.png"
   },
   {
-    "title":"火车票",
-    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/hotel.png"
+    "title":"拼车",
+    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/train.png"
   },
   {
-    "title":"景点门票",
-    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/hotel.png"
+    "title":"拼团旅行",
+    "pic_src":"http://s.qunarzz.com/homenode/images/touchheader/piao.png"
   }
 ];

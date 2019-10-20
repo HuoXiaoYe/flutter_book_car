@@ -4,20 +4,8 @@ import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../config/banner_src.dart';
-
-// import '../../api/get_data.dart';
-// import '../../config/url.dart';
-// import '../../model/banner.dart';
-
-// class Index extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       // child:Text("首页")
-//       children: <Widget>[Banner()],
-//     );
-//   }
-// }
+import '../../config/nav.dart';
+import '../../config/recommend.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -76,24 +64,60 @@ class _BannerState extends State<Banner> {
       ),
     );
   }
-
-  // getBannerList() async {
-  //   await request(api["banner"]).then((val) {
-  //     BannerModel list = BannerModel.fromJson(jsonDecode(val));
-  //     setState(() {
-  //       bannerList = list.data.slider;
-  //     });
-  //   });
-  // }
 }
 
 //轮播图下方导航组件
 
 class Tabbar extends StatelessWidget {
+  Widget item(data) {
+    return Container(
+      padding: EdgeInsets.only(top: 8,bottom: 5),
+      width: 70,
+      child: InkWell(
+          onDoubleTap: () {},
+          child: Column(
+            children: <Widget>[
+              Image.network(
+                data["pic_src"],
+                width: 50,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 5),
+                child: Text(data["title"]),
+              )
+            ],
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      child: Card(
+        margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: NavList.map((v) => item(v)).toList(),
+        ),
+      ),
     );
   }
 }
+
+// 附近推荐
+
+
+class Recommend extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[],
+        ),
+    );
+  }
+}
+
+
