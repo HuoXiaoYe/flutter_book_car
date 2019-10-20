@@ -26,7 +26,11 @@ class _CarHomeState extends State<CarHome> {
         child: SearchBar(),
         preferredSize: Size.fromHeight(40),
       ),
-      body: pageList[this._activeIndex],
+      // body: pageList[this._activeIndex],
+       body: IndexedStack(
+        index: _activeIndex,
+        children: pageList,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this._activeIndex,

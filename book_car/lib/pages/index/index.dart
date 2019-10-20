@@ -7,7 +7,26 @@ import '../../api/get_data.dart';
 import '../../config/url.dart';
 import '../../model/banner.dart';
 
-class Index extends StatelessWidget {
+// class Index extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       // child:Text("首页")
+//       children: <Widget>[Banner()],
+//     );
+//   }
+// }
+
+
+class Index extends StatefulWidget {
+  @override
+  _IndexState createState() => _IndexState();
+}
+
+class _IndexState extends State<Index>  with AutomaticKeepAliveClientMixin {
+  
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,8 +38,6 @@ class Index extends StatelessWidget {
 
 // 轮播图组件
 class Banner extends StatefulWidget {
-  // final List list;
-  // Banner(this.list);
   @override
   _BannerState createState() => _BannerState();
 }
@@ -42,14 +59,10 @@ class _BannerState extends State<Banner> {
         itemCount: bannerList.length,
         itemBuilder: (BuildContext context, int index) {
           return new Container(
-            padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              child: Image.network(
+             child: Image.network(
                 bannerList[index].picUrl,
                 fit: BoxFit.fitHeight,
               ),
-            ),
           );
         },
         pagination: new SwiperPagination(),
