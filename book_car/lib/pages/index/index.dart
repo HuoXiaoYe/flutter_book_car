@@ -1,11 +1,12 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import "package:flutter/material.dart";
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../config/banner_src.dart';
 
-import '../../api/get_data.dart';
-import '../../config/url.dart';
-import '../../model/banner.dart';
+// import '../../api/get_data.dart';
+// import '../../config/url.dart';
+// import '../../model/banner.dart';
 
 // class Index extends StatelessWidget {
 //   @override
@@ -43,10 +44,10 @@ class Banner extends StatefulWidget {
 }
 
 class _BannerState extends State<Banner> {
-  List bannerList = [];
+  // List bannerList = [];
   @override
   void initState() {
-    getBannerList(); // 调用获取轮播图数据的方法
+    // getBannerList(); // 调用获取轮播图数据的方法
     super.initState();
   }
 
@@ -60,7 +61,7 @@ class _BannerState extends State<Banner> {
         itemBuilder: (BuildContext context, int index) {
           return new Container(
              child: Image.network(
-                bannerList[index].picUrl,
+                bannerList[index]["picUrl"],
                 fit: BoxFit.fitHeight,
               ),
           );
@@ -71,12 +72,12 @@ class _BannerState extends State<Banner> {
     );
   }
 
-  getBannerList() async {
-    await request(api["banner"]).then((val) {
-      BannerModel list = BannerModel.fromJson(jsonDecode(val));
-      setState(() {
-        bannerList = list.data.slider;
-      });
-    });
-  }
+  // getBannerList() async {
+  //   await request(api["banner"]).then((val) {
+  //     BannerModel list = BannerModel.fromJson(jsonDecode(val));
+  //     setState(() {
+  //       bannerList = list.data.slider;
+  //     });
+  //   });
+  // }
 }
