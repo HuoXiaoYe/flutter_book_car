@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../config/recommend.dart';
+import '../place_detail/place_detail.dart';
 
 class RecommendList extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class RecommendList extends StatefulWidget {
 }
 
 class _RecommendListState extends State<RecommendList> {
-  var _ListData = recommendList;
+  List<Map> _ListData = recommendList;
 
   Widget _item(data) {
     return Container(
@@ -21,8 +22,8 @@ class _RecommendListState extends State<RecommendList> {
             Container(
               // 上方图片文字
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.black12,width: 2 ))
-              ),
+                  border: Border(
+                      bottom: BorderSide(color: Colors.black12, width: 2))),
               padding: EdgeInsets.only(bottom: 6),
               margin: EdgeInsets.only(top: 5, left: 5, right: 5),
               child: Row(
@@ -32,10 +33,9 @@ class _RecommendListState extends State<RecommendList> {
                   Container(
                     // 图片
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
-                        // border: Border(bottom: BorderSide(color: Colors.black38,))
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
                     ),
-                        
+
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(0)),
                       child: Stack(
@@ -129,12 +129,9 @@ class _RecommendListState extends State<RecommendList> {
                           ),
                         ),
                         Container(
-                          // 价格 地点
-                          // color: Colors.red,
                           width: 250,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            // crossAxisAlignment: CrossAxisAlignment.,
                             children: <Widget>[
                               Container(
                                   child: Row(
@@ -160,7 +157,6 @@ class _RecommendListState extends State<RecommendList> {
                                 ],
                               )),
                               Container(
-                                // 地点
                                 child: Text(data["addr"]),
                               )
                             ],
@@ -169,16 +165,15 @@ class _RecommendListState extends State<RecommendList> {
                         Container(
                           margin: EdgeInsets.only(top: 5),
                           alignment: Alignment.center,
-                          child: Text("赠券",style: TextStyle(color: Colors.orange),),
+                          child: Text(
+                            "赠券",
+                            style: TextStyle(color: Colors.orange),
+                          ),
                           width: 40,
                           height: 24,
-                          // color: Colors.orange,
                           decoration: BoxDecoration(
-                            // color: Colors.orange,
-                            // borderRadius: BorderRadius.all(Radius.circular(10)),
-                            border: Border.all(width: 2,color: Colors.orange)
-
-                          ),
+                              border:
+                                  Border.all(width: 2, color: Colors.orange)),
                         )
                       ],
                     ),
@@ -186,35 +181,50 @@ class _RecommendListState extends State<RecommendList> {
                 ],
               ),
             ),
-            _discount(data["desc1"],data["price_1"],true),
-            _discount(data["desc2"],data["price_2"],false),
+            _discount(data["desc1"], data["price_1"], true),
+            _discount(data["desc2"], data["price_2"], false),
           ],
         ),
       ),
     );
   }
 
-  Widget _discount(desc,price,hasLine){
+  Widget _discount(desc, price, hasLine) {
     return Container(
       height: 55,
-      margin: EdgeInsets.only(left: 10,right: 10),
+      margin: EdgeInsets.only(left: 10, right: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        border: hasLine ? Border(bottom: BorderSide(color: Colors.black12,width: 2 )) : null
-        //bottom: BorderSide(color: Colors.black12,width: 2 )
-      ),
+          border: hasLine
+              ? Border(bottom: BorderSide(color: Colors.black12, width: 2))
+              : null
+          //bottom: BorderSide(color: Colors.black12,width: 2 )
+          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             width: 270,
-            child: Text(desc,style: TextStyle(fontSize: 16,),maxLines: 1,overflow: TextOverflow.ellipsis,),
+            child: Text(
+              desc,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Container(
             child: Row(
               children: <Widget>[
-                Text("￥",style: TextStyle(fontSize: 12,color: Colors.orange),),
-                Text(price,style: TextStyle(fontSize: 24,color: Colors.orange),)
+                Text(
+                  "￥",
+                  style: TextStyle(fontSize: 12, color: Colors.orange),
+                ),
+                Text(
+                  price,
+                  style: TextStyle(fontSize: 24, color: Colors.orange),
+                )
               ],
             ),
           )
@@ -227,11 +237,36 @@ class _RecommendListState extends State<RecommendList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: ListView.builder(
-            itemCount: _ListData.length,
-            itemBuilder: (context, index) {
-              return _item(_ListData[index]);
-            }),
+        child: Column(
+          children: <Widget>[
+            Container(//顶部搜索 筛选区域
+              height: 80,
+              // color: Colors.red,
+            ),
+            Expanded(child: 
+            Container(
+                // color: Colors.blue,
+                padding: EdgeInsets.only(top: 0),
+                margin: EdgeInsets.only(top: 0),
+                child: ListView.builder(
+                    // 景点列表
+                    itemCount: _ListData.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  PlaceDetail(_ListData[index]["title"]),
+                            ));
+                          },
+                          child: _item(
+                            _ListData[index],
+                          ));
+                    }),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
