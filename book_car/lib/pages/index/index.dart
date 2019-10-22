@@ -8,6 +8,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../config/banner_src.dart';
 import '../../config/nav.dart';
 import '../../config/recommend.dart';
+import '../../config/book_car.dart';
 import './recommend_list/recommend_list.dart';
 
 class Index extends StatefulWidget {
@@ -266,6 +267,49 @@ class BookCar extends StatelessWidget {
     );
   }
 
+  Widget _item(data) {
+    return InkWell(
+      child: Container(
+        // margin: EdgeInsets.only(top: 8),
+        width: 130,
+        height: 190,
+        child: Card(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 3,
+              ),
+              Image.network(
+                data["img"],
+                width: 115,
+                height: 115,
+                fit: BoxFit.fill,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8,bottom: 6),
+                child:Text(data["title"])),
+              Container(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(bottom: 3),child: Text("￥",style: TextStyle(fontSize: 12,color: Colors.orange),),),
+                    Text(data["price"],style: TextStyle(fontSize: 22,color: Colors.orange)),
+                    Padding(
+                      padding: EdgeInsets.only(left: 2,bottom: 1),
+                      child: Text("起"),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -274,9 +318,9 @@ class BookCar extends StatelessWidget {
           children: <Widget>[
             _title(context), //标题区域
             Wrap(
-              children: <Widget>[
-                Image.network("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1571728548&di=41a5c0bed22b7df4d2a494fa91cf2732&src=http://hiphotos.baidu.com/lbsugc/pic/item/b8389b504fc2d562b72fb703e51190ef76c66c3c.jpg")
-              ],
+              children: bookCar.map((data) {
+                return _item(data);
+              }).toList(),
             )
           ],
         ),
