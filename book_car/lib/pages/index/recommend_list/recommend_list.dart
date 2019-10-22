@@ -122,7 +122,7 @@ class _RecommendListState extends State<RecommendList> {
                                 child: Text(
                                   data['comment'] + "评论",
                                   style: TextStyle(
-                                      color: Colors.black87, fontSize: 18),
+                                      color: Colors.black87, fontSize: 14),
                                 ),
                               )
                             ],
@@ -239,13 +239,12 @@ class _RecommendListState extends State<RecommendList> {
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(//顶部搜索 筛选区域
-              height: 80,
-              // color: Colors.red,
-            ),
-            Expanded(child: 
-            Container(
-                // color: Colors.blue,
+            // Container(
+            //   //顶部搜索 筛选区域
+            //   height: 80,
+            // ),
+            Expanded(
+              child: Container(
                 padding: EdgeInsets.only(top: 0),
                 margin: EdgeInsets.only(top: 0),
                 child: ListView.builder(
