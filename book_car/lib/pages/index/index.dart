@@ -20,12 +20,13 @@ class _IndexState extends State<Index> with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       // child:Text("首页")
       children: <Widget>[
         Banner(), // 轮播图组件
         Tabbar(), // 导航组件
         Recommend(), // 附近推荐
+        BookCar(), // 拼车去哪儿
       ],
     );
   }
@@ -134,19 +135,30 @@ class Recommend extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 6,),
+              padding: EdgeInsets.only(
+                top: 6,
+              ),
               child: Text(data["title"]),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Text("￥",style: TextStyle(fontSize: 12,color: Colors.orange),), 
+                Text(
+                  "￥",
+                  style: TextStyle(fontSize: 12, color: Colors.orange),
+                ),
                 Padding(
                   padding: EdgeInsets.only(right: 3),
-                  child: Text(data["price_0"],style: TextStyle(fontSize: 18,color: Colors.orange),),
+                  child: Text(
+                    data["price_0"],
+                    style: TextStyle(fontSize: 18, color: Colors.orange),
+                  ),
                 ),
-                Text("起",style: TextStyle(fontSize: 14),)
+                Text(
+                  "起",
+                  style: TextStyle(fontSize: 14),
+                )
               ],
             )
           ],
@@ -180,7 +192,8 @@ class Recommend extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context)=>new RecommendList()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => new RecommendList()));
               },
               child: Text(
                 "查看更多",
@@ -207,6 +220,63 @@ class Recommend extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: recommendList.map((v) => _item(v)).toList(),
               ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// 拼车去哪
+class BookCar extends StatelessWidget {
+  Widget _title(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 8, top: 8),
+      height: 44,
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            "拼车去哪儿",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Colors.black54),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            height: 25,
+            padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.black26),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: InkWell(
+              onTap: () {},
+              child: Text(
+                "查看更多",
+                style: TextStyle(color: Colors.black45),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            _title(context), //标题区域
+            Wrap(
+              children: <Widget>[
+                Image.network("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1571728548&di=41a5c0bed22b7df4d2a494fa91cf2732&src=http://hiphotos.baidu.com/lbsugc/pic/item/b8389b504fc2d562b72fb703e51190ef76c66c3c.jpg")
+              ],
             )
           ],
         ),
