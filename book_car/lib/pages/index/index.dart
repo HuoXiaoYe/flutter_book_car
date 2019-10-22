@@ -10,6 +10,7 @@ import '../../config/nav.dart';
 import '../../config/recommend.dart';
 import '../../config/book_car.dart';
 import './recommend_list/recommend_list.dart';
+import './bookcar_detail/bookcar_detail.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -267,8 +268,11 @@ class BookCar extends StatelessWidget {
     );
   }
 
-  Widget _item(data) {
+  Widget _item(data,BuildContext context) {
     return InkWell(
+      onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>new BookCarDetail(data["title"])));
+      },
       child: Container(
         // margin: EdgeInsets.only(top: 8),
         width: 130,
@@ -319,7 +323,7 @@ class BookCar extends StatelessWidget {
             _title(context), //标题区域
             Wrap(
               children: bookCar.map((data) {
-                return _item(data);
+                return _item(data,context);
               }).toList(),
             )
           ],
