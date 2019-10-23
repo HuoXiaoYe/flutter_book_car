@@ -230,7 +230,7 @@ class Recommend extends StatelessWidget {
   }
 }
 
-// 拼车去哪
+// 拼车去哪儿
 class BookCar extends StatelessWidget {
   Widget _title(BuildContext context) {
     return Container(
