@@ -73,7 +73,7 @@ class _BannerState extends State<Banner> {
   }
 }
 
-//轮播图下方导航组件
+//轮播图下方的导航组件
 
 class Tabbar extends StatelessWidget {
   Widget item(data) {
