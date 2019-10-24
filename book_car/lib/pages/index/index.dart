@@ -29,6 +29,7 @@ class _IndexState extends State<Index> with AutomaticKeepAliveClientMixin {
         Tabbar(), // 导航组件
         Recommend(), // 附近推荐
         BookCar(), // 拼车去哪儿
+        GuessYouLike(), //猜你喜欢
       ],
     );
   }
@@ -325,6 +326,64 @@ class BookCar extends StatelessWidget {
               children: bookCar.map((data) {
                 return _item(data,context);
               }).toList(),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+// 猜你喜欢 
+
+class GuessYouLike extends StatelessWidget {
+   Widget _title(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 8, top: 8),
+      height: 44,
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            "猜你喜欢",
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Colors.black54),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            height: 25,
+            padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.black26),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: InkWell(
+              onTap: () {},
+              child: Text(
+                "查看更多",
+                style: TextStyle(color: Colors.black45),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            _title(context),
+            Column(
+              children: <Widget>[
+                
+              ],
             )
           ],
         ),
