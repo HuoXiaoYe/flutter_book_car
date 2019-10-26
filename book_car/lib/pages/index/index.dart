@@ -270,10 +270,11 @@ class BookCar extends StatelessWidget {
     );
   }
 
-  Widget _item(data,BuildContext context) {
+  Widget _item(data, BuildContext context) {
     return InkWell(
-      onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>new BookCarDetail(data["title"])));
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => new BookCarDetail(data["title"])));
       },
       child: Container(
         // margin: EdgeInsets.only(top: 8),
@@ -292,18 +293,25 @@ class BookCar extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 8,bottom: 6),
-                child:Text(data["title"])),
+                  padding: EdgeInsets.only(top: 8, bottom: 6),
+                  child: Text(data["title"])),
               Container(
                 alignment: Alignment.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(bottom: 3),child: Text("￥",style: TextStyle(fontSize: 12,color: Colors.orange),),),
-                    Text(data["price"],style: TextStyle(fontSize: 22,color: Colors.orange)),
                     Padding(
-                      padding: EdgeInsets.only(left: 2,bottom: 1),
+                      padding: EdgeInsets.only(bottom: 3),
+                      child: Text(
+                        "￥",
+                        style: TextStyle(fontSize: 12, color: Colors.orange),
+                      ),
+                    ),
+                    Text(data["price"],
+                        style: TextStyle(fontSize: 22, color: Colors.orange)),
+                    Padding(
+                      padding: EdgeInsets.only(left: 2, bottom: 1),
                       child: Text("起"),
                     )
                   ],
@@ -325,7 +333,7 @@ class BookCar extends StatelessWidget {
             _title(context), //标题区域
             Wrap(
               children: bookCar.map((data) {
-                return _item(data,context);
+                return _item(data, context);
               }).toList(),
             )
           ],
@@ -335,8 +343,7 @@ class BookCar extends StatelessWidget {
   }
 }
 
-
-// 猜你喜欢 
+// 猜你喜欢
 
 class GuessYouLike extends StatelessWidget {
   Widget _title(BuildContext context) {
@@ -374,36 +381,52 @@ class GuessYouLike extends StatelessWidget {
       ),
     );
   }
-  
-  Widget _item(data){
+
+  Widget _item(data, BuildContext context) {
     return Container(
-      child: Card(
-        child: Column(
-          children: <Widget>[
-            _smallTitle(data["title"]),
-          ],
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, 15.0), //阴影xy轴偏移量
+              blurRadius: 15.0, //阴影模糊程度
+              spreadRadius: 1.0 //阴影扩散程度
+              )
+        ],
+      ),
+      child: InkWell(
+        onTap: () {},
+        child: Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              _smallTitle(data["title"]),
+              Image.network(
+                data["img"],
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-
-  Widget _smallTitle(String title){
+  Widget _smallTitle(String title) {
     return Container(
-      child: Text(title),
+      padding: EdgeInsets.fromLTRB(14, 3, 10, 6),
+      child: Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+      ),
     );
   }
-
-
-
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -413,8 +436,8 @@ class GuessYouLike extends StatelessWidget {
           children: <Widget>[
             _title(context),
             Column(
-              children: guessYouLikeList.map((data){
-                return _item(data);
+              children: guessYouLikeList.map((data) {
+                return _item(data, context);
               }).toList(),
             )
           ],
