@@ -9,6 +9,7 @@ import '../../config/banner_src.dart';
 import '../../config/nav.dart';
 import '../../config/recommend.dart';
 import '../../config/book_car.dart';
+import '../../config/guess_you_like.dart';
 import './recommend_list/recommend_list.dart';
 import './bookcar_detail/bookcar_detail.dart';
 
@@ -338,7 +339,7 @@ class BookCar extends StatelessWidget {
 // 猜你喜欢 
 
 class GuessYouLike extends StatelessWidget {
-   Widget _title(BuildContext context) {
+  Widget _title(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 8, top: 8),
       height: 44,
@@ -373,6 +374,37 @@ class GuessYouLike extends StatelessWidget {
       ),
     );
   }
+  
+  Widget _item(data){
+    return Container(
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            _smallTitle(data["title"]),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _smallTitle(String title){
+    return Container(
+      child: Text(title),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -381,9 +413,9 @@ class GuessYouLike extends StatelessWidget {
           children: <Widget>[
             _title(context),
             Column(
-              children: <Widget>[
-                
-              ],
+              children: guessYouLikeList.map((data){
+                return _item(data);
+              }).toList(),
             )
           ],
         ),
