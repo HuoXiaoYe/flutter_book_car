@@ -408,6 +408,18 @@ class GuessYouLike extends StatelessWidget {
                 data["img"],
                 height: 200,
                 width: MediaQuery.of(context).size.width,
+              ),
+              Divider(),
+              Container(
+                // color: Colors.red,
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.fromLTRB(14, 3, 10, 6),
+                child: Text(
+                  data["desc"],
+                   textAlign:TextAlign.start,
+                  maxLines: 2,
+                 overflow: TextOverflow.ellipsis,
+                ),
               )
             ],
           ),
@@ -423,7 +435,7 @@ class GuessYouLike extends StatelessWidget {
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
       ),
     );
   }
