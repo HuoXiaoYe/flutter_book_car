@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import '../../.././main.dart';
 
 // 时间
 // 出发地
@@ -64,7 +65,9 @@ class ConfirmBookList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>new App()));
+                          },
                           child: Container(
                             padding: EdgeInsets.only(left: 30, right: 30),
                             decoration: BoxDecoration(
@@ -73,14 +76,16 @@ class ConfirmBookList extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             alignment: Alignment.center,
                             height: 40,
-                            child: Text("确认发布"),
+                            child: Text("确认发布",style: TextStyle(color: Colors.white),),
                           ),
                         ),
                         Container(
                           width: 20,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
                           child: Container(
                             // margin: EdgeInsets.only(left: 20),
                             padding: EdgeInsets.only(left: 30, right: 30),
