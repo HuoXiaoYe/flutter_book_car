@@ -1,15 +1,5 @@
 import "package:flutter/material.dart";
-
-// class Add extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child:Text("增加页面")
-//       ),
-//     );
-//   }
-// }
+import './add_list/add_list.dart';
 
 class Add extends StatefulWidget {
   @override
@@ -40,14 +30,6 @@ class _AddState extends State<Add> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //     title: Text('新的拼单'),
-        //     bottom: TabBar(
-        //       controller: _controller,
-        //       indicatorSize: TabBarIndicatorSize.label,
-        //       indicatorWeight: 3.0,
-        //       tabs: [_title("叫车"), _title("拼车"), _title("拼团")],
-        //     )),
         body: Column(
           children: <Widget>[
             Container(
@@ -59,12 +41,18 @@ class _AddState extends State<Add> with SingleTickerProviderStateMixin {
               indicatorWeight: 3.0,
               indicatorColor:Colors.red,
               labelColor:Colors.black,
-              tabs: [_title("叫车"), _title("拼车"), _title("拼团")],
+              tabs: [_title("叫车"), _title("拼车出行"), _title("拼团旅行")],
             ),
-            // TabBarView(
-            //   controller: _controller,
-            //   children: <Widget>[Text('1111'), Text('2222'), Text('3333')],
-            // )
+           Expanded(
+             child:  TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                AddList(false), 
+                AddList(true), 
+                AddList(true)
+              ],
+            ),
+           )
           ],
         ));
   }
