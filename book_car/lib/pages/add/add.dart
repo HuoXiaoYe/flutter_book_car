@@ -33,7 +33,7 @@ class _AddState extends State<Add> with SingleTickerProviderStateMixin {
   Widget _title(String str) {
     return Text(
       str,
-      style: TextStyle(fontSize: 18),
+      style: TextStyle(fontSize: 14),
     );
   }
 
@@ -58,7 +58,7 @@ class _AddState extends State<Add> with SingleTickerProviderStateMixin {
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: 3.0,
               indicatorColor:Colors.red,
-              labelColor:Colors.redAccent,
+              labelColor:Colors.black,
               tabs: [_title("叫车"), _title("拼车"), _title("拼团")],
             ),
             // TabBarView(
