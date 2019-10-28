@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../confirm_book_list/confirm_book_list.dart';
 
 class AddList extends StatefulWidget {
   bool isShow;
@@ -111,20 +112,25 @@ class _AddListState extends State<AddList> {
               ),
             ),
           ) : Container(),
-          InkWell(
-            onTap: (){},
+          InkWell( // 发布订单按钮
+            onTap: (){
+              Map info = this.info;
+              Navigator.of(context).push(MaterialPageRoute(builder:(context)=>new ConfirmBookList(info)));
+            },
             child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: 25),
               width: 50,
               height: 60,
-              // color: Colors.red,
+              child: Text("发布订单",style: TextStyle(
+                color: Colors.white,
+                fontSize: 28
+              ),),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                // color: Colors.red,
                 gradient: LinearGradient(
-                  colors: [Colors.blue,Colors.green,Colors.green,Colors.blue]
+                  colors: [Colors.blue,Colors.green,Colors.blue]
                 ),
-                // border: Border.all(width: 2,color: Colors.grey),
-                // color: Colors.black26
               ),
             ),
           )
