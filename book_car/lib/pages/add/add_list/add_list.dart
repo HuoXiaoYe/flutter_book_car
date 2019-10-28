@@ -16,6 +16,7 @@ class _AddListState extends State<AddList> {
   String startAddr;
   String endAddr;
   String number;
+  Map info = {};
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +26,10 @@ class _AddListState extends State<AddList> {
           widget.isShow ? Container( // 时间
             margin: EdgeInsets.only(bottom: 8),
             child: TextField(
-              onChanged: (newValue) {},
+              onChanged: (newValue) {
+                this.time = newValue;
+                this.info["time"] = newValue;
+              },
               // keyboardType: TextInputType.text,
               decoration: new InputDecoration(
                 suffix: Container(
@@ -44,7 +48,10 @@ class _AddListState extends State<AddList> {
           Container( // 出发地
             margin: EdgeInsets.only(bottom: 8),
             child: TextField(
-              onChanged: (newValue) {},
+              onChanged: (newValue) {
+                this.startAddr = newValue;
+                this.info["startAddr"] = newValue;
+              },
               keyboardType: TextInputType.text,
               decoration: new InputDecoration(
                 suffix: Container(
@@ -63,7 +70,10 @@ class _AddListState extends State<AddList> {
           Container( // 目的地
             margin: EdgeInsets.only(bottom: 8),
             child: TextField(
-              onChanged: (newValue) {},
+              onChanged: (newValue) {
+                this.endAddr = newValue;
+                this.info["endAddr"] = newValue;
+              },
               keyboardType: TextInputType.text,
               decoration: new InputDecoration(
                 suffix: Container(
@@ -82,7 +92,10 @@ class _AddListState extends State<AddList> {
           widget.isShow ? Container( //期望人数
             margin: EdgeInsets.only(bottom: 8),
             child: TextField(
-              onChanged: (newValue) {},
+              onChanged: (newValue) {
+                this.number = newValue;
+                this.info["number"] = newValue;
+              },
               keyboardType: TextInputType.text,
               decoration: new InputDecoration(
                 suffix: Container(
@@ -98,6 +111,23 @@ class _AddListState extends State<AddList> {
               ),
             ),
           ) : Container(),
+          InkWell(
+            onTap: (){},
+            child: Container(
+              width: 50,
+              height: 60,
+              // color: Colors.red,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                // color: Colors.red,
+                gradient: LinearGradient(
+                  colors: [Colors.blue,Colors.green,Colors.green,Colors.blue]
+                ),
+                // border: Border.all(width: 2,color: Colors.grey),
+                // color: Colors.black26
+              ),
+            ),
+          )
         ],
       ),
     );
