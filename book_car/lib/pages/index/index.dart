@@ -404,21 +404,24 @@ class GuessYouLike extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               _smallTitle(data["title"]),
-              Image.network(
-                data["img"],
-                height: 200,
+              Container(
+                height: 140,
                 width: MediaQuery.of(context).size.width,
+                child: Image.network(
+                  data["img"],
+                  fit: BoxFit.cover,
+                ),
               ),
               Divider(),
               Container(
                 // color: Colors.red,
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.fromLTRB(14, 3, 10, 6),
+                padding: EdgeInsets.fromLTRB(2, 3, 10, 6),
                 child: Text(
                   data["desc"],
-                   textAlign:TextAlign.start,
+                  textAlign: TextAlign.start,
                   maxLines: 2,
-                 overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.ellipsis,
                 ),
               )
             ],
@@ -430,7 +433,7 @@ class GuessYouLike extends StatelessWidget {
 
   Widget _smallTitle(String title) {
     return Container(
-      padding: EdgeInsets.fromLTRB(14, 3, 10, 6),
+      padding: EdgeInsets.fromLTRB(2, 3, 10, 6),
       child: Text(
         title,
         maxLines: 1,
